@@ -5,6 +5,14 @@
 #endif
 #include <Windows.h>
 
+struct WINDOW_DESC
+{
+  INT width, height;
+  bool isFullscreen;
+  bool drawTitle;
+  bool adjustWindow; // If drawTitle is false, adjustWindow was true automatically.
+};
+
 class System
 {
 public:
@@ -18,7 +26,7 @@ public:
   LRESULT CALLBACK MessageHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 private:
-  bool InitWindow(INT posX, INT posY);
+  bool InitWindow(const WINDOW_DESC& desc);
   void ReleaseWindow();
 
 private:
