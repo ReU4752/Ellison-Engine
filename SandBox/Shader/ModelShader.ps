@@ -1,0 +1,20 @@
+struct PS_INPUT
+{
+     float4 position : SV_POSITION;
+     float3 normal : NORMAL;
+};
+
+float4 ColorPixelShader(PS_INPUT input) : SV_TARGET
+{
+     input.normal = normalize(input.normal);
+
+     float3 ambientLight = (0.15f, 0.15f, 0.15f);
+
+     float3 lightColor = float3(1.0f, 1.0f, 1.0f);
+     float3 lightDir = float3(-0.707f, -0.707f, -0.707f);
+     lightDir = normalize(-lightDir);
+
+     float lightIntensity = saturate(dot(input.normal, lightDir));
+
+     return float4((lightColor * lightIntensity) + ambientLight, 1.0f); 
+}

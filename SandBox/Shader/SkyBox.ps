@@ -1,0 +1,13 @@
+TextureCube shaderTexture;
+SamplerState SampleType;
+
+struct PixelInputType
+{
+     float4 position : SV_POSITION;
+     float3 texCoord : TEXCOORD;
+};
+
+float4 PixelShaderEntry(PixelInputType input) : SV_TARGET
+{
+     return shaderTexture.Sample(SampleType, input.texCoord);
+}
